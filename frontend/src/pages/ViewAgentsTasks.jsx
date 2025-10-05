@@ -11,7 +11,7 @@ export default function ViewAgentsTasks() {
     try {
       const token = localStorage.getItem("token");
 
-      const agentsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/view/agents`, {
+      const agentsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/view/agents`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAgents(agentsResponse.data.agents);

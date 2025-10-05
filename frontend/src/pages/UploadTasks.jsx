@@ -24,7 +24,7 @@ const UploadTasks = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/tasks/upload`,
+        `${process.env.REACT_APP_API_URL}/api/tasks/upload`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

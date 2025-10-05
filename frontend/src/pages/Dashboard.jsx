@@ -14,7 +14,7 @@ export default function Dashboard() {
     }
 
     axios
-      .get(`${process.env.REACT_APP_API_URL}/dashboard/stats`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/dashboard/stats`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => setStats(response.data))

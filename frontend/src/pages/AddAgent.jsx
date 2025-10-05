@@ -11,7 +11,7 @@ export default function AddAgent() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/agents/add`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/agents/add`, {
         name,
         email,
         mobile,
