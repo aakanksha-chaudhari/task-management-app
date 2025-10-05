@@ -11,14 +11,20 @@ export default function ViewAgentsTasks() {
     try {
       const token = localStorage.getItem("token");
 
-      const agentsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/view/agents`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const agentsResponse = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/view/agents`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setAgents(agentsResponse.data.agents);
 
-      const tasksResponse = await axios.get(`${process.env.REACT_APP_API_URL}/view/tasks`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const tasksResponse = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/view/tasks`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setTasks(tasksResponse.data.tasks);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -34,9 +40,12 @@ export default function ViewAgentsTasks() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/view/agents/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/view/agents/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       // Update state after deletion
       setAgents(agents.filter((agent) => agent._id !== id));
     } catch (err) {
