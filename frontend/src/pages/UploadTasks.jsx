@@ -58,9 +58,17 @@ const UploadTasks = () => {
         <a
           href="/sample-tasks.csv"
           download="sample-tasks.csv"
-          style={{ color: "#2980b9", textDecoration: "none", fontWeight: "bold" }}
+          style={{
+            color: "#2980b9",
+            textDecoration: "underline",
+            fontWeight: "bold",
+            cursor: "pointer",
+            transition: "color 0.3s"
+          }}
+          onMouseOver={(e) => (e.target.style.color = "#1f618d")}
+          onMouseOut={(e) => (e.target.style.color = "#2980b9")}
         >
-          Download Sample CSV for Testing
+          📥 Download Sample CSV for Testing
         </a>
       </div>
 

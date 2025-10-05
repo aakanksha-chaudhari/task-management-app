@@ -46,7 +46,6 @@ export default function ViewAgentsTasks() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      // Update state after deletion
       setAgents(agents.filter((agent) => agent._id !== id));
     } catch (err) {
       console.error("Error deleting agent:", err);
@@ -55,88 +54,142 @@ export default function ViewAgentsTasks() {
   };
 
   return (
-    <div style={{ padding: "30px", fontFamily: "Arial, sans-serif" }}>
-      <h2 style={{ color: "#2c3e50" }}>Agents & Tasks Overview</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {/* Agents Table */}
-      <h3 style={{ marginTop: "20px" }}>Agents</h3>
-      <table
-        border="1"
-        cellPadding="10"
-        style={{ borderCollapse: "collapse", width: "100%", marginBottom: "30px" }}
+    <div
+      style={{
+        padding: "40px",
+        fontFamily: "Arial, sans-serif",
+        backgroundColor: "#f5f7fa",
+        minHeight: "100vh",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "30px",
+          borderRadius: "12px",
+          backgroundColor: "#fff",
+          boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+        }}
       >
-        <thead style={{ backgroundColor: "#f2f2f2" }}>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {agents.map((agent) => (
-            <tr key={agent._id}>
-              <td>{agent.name}</td>
-              <td>{agent.email}</td>
-              <td>
-                <button
-                  onClick={() => handleDelete(agent._id)}
-                  style={{
-                    padding: "5px 10px",
-                    borderRadius: "5px",
-                    border: "none",
-                    backgroundColor: "#e74c3c",
-                    color: "#fff",
-                    cursor: "pointer",
-                  }}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <h2
+          style={{
+            color: "#2c3e50",
+            textAlign: "center",
+            marginBottom: "30px",
+            fontSize: "28px",
+          }}
+        >
+          Agents & Tasks Overview
+        </h2>
 
-      {/* Tasks List as Cards */}
-      <h3>Distributed Task Records:</h3>
-      <div style={{ display: "grid", gap: "15px", marginTop: "15px" }}>
-        {tasks.map((task) => (
-          <div
-            key={task._id}
+        {error && (
+          <p
             style={{
-              border: "1px solid #ddd",
-              borderRadius: "8px",
-              padding: "15px",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-              transition: "transform 0.2s, box-shadow 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-5px)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,0.1)";
+              color: "red",
+              textAlign: "center",
+              marginBottom: "20px",
+              fontWeight: "bold",
             }}
           >
-            <p>
-              <strong>First Name:</strong> {task.firstName}
-            </p>
-            <p>
-              <strong>Phone:</strong> {task.phone}
-            </p>
-            <p>
-              <strong>Notes:</strong> {task.notes}
-            </p>
-            <p>
-              <strong>Assigned To:</strong>{" "}
-              {task.assignedAgent
-                ? `${task.assignedAgent.name} (${task.assignedAgent.email})`
-                : "N/A"}
-            </p>
-          </div>
-        ))}
+            {error}
+          </p>
+        )}
+
+        {/* Agents Table */}
+        <h3 style={{ marginTop: "20px", color: "#34495e" }}>Agents</h3>
+        <table
+          border="1"
+          cellPadding="10"
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+            marginBottom: "30px",
+            backgroundColor: "#fafafa",
+          }}
+        >
+          <thead style={{ backgroundColor: "#ecf0f1" }}>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {agents.map((agent) => (
+              <tr key={agent._id}>
+                <td>{agent.name}</td>
+                <td>{agent.email}</td>
+                <td>
+                  <button
+                    onClick={() => handleDelete(agent._id)}
+                    style={{
+                      padding: "5px 12px",
+                      borderRadius: "5px",
+                      border: "none",
+                      backgroundColor: "#e74c3c",
+                      color: "#fff",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Tasks List as Cards */}
+        <h3 style={{ color: "#34495e", marginBottom: "15px" }}>
+          Distributed Task Records:
+        </h3>
+        <div
+          style={{
+            display: "grid",
+            gap: "15px",
+            marginTop: "15px",
+          }}
+        >
+          {tasks.map((task) => (
+            <div
+              key={task._id}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: "10px",
+                padding: "20px",
+                boxShadow: "0 3px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.2s, box-shadow 0.2s",
+                backgroundColor: "#fff",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-5px)";
+                e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 3px 8px rgba(0,0,0,0.1)";
+              }}
+            >
+              <p>
+                <strong>First Name:</strong> {task.firstName}
+              </p>
+              <p>
+                <strong>Phone:</strong> {task.phone}
+              </p>
+              <p>
+                <strong>Notes:</strong> {task.notes}
+              </p>
+              <p>
+                <strong>Assigned To:</strong>{" "}
+                {task.assignedAgent
+                  ? `${task.assignedAgent.name} (${task.assignedAgent.email})`
+                  : "N/A"}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
