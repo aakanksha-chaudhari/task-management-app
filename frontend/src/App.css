@@ -1,0 +1,44 @@
+/* Main app container styling */
+.App {
+  text-align: center;
+}
+
+/* Logo styling */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none; /* Disable pointer events on logo */
+}
+
+/* Apply animation if user has no preference for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin 20s linear infinite;
+  }
+}
+
+/* Header styling */
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* Link styling */
+.App-link {
+  color: #61dafb;
+}
+
+/* Keyframes for spinning logo */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
