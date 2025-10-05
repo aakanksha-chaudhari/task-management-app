@@ -38,48 +38,106 @@ const UploadTasks = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Upload CSV / Excel and Distribute Tasks</h2>
+    <div
+      style={{
+        maxWidth: "900px",
+        margin: "30px auto",
+        padding: "20px",
+        fontFamily: "Arial, sans-serif",
+        backgroundColor: "#f9f9f9",
+        borderRadius: "10px",
+        boxShadow: "0px 0px 15px rgba(0,0,0,0.1)"
+      }}
+    >
+      <h2 style={{ color: "#2c3e50", textAlign: "center", marginBottom: "20px" }}>
+        Upload CSV / Excel and Distribute Tasks
+      </h2>
 
       {/* Sample CSV download link */}
-      <div style={{ marginBottom: "15px" }}>
-        <a href="/sample-tasks.csv" download="sample-tasks.csv">
+      <div style={{ marginBottom: "15px", textAlign: "center" }}>
+        <a
+          href="/sample-tasks.csv"
+          download="sample-tasks.csv"
+          style={{ color: "#2980b9", textDecoration: "none", fontWeight: "bold" }}
+        >
           Download Sample CSV for Testing
         </a>
       </div>
 
       {/* Display error if any */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
 
-      <input type="file" accept=".csv, .xlsx, .xls" onChange={handleFileChange} />
-      <button onClick={handleUpload} style={{ marginLeft: "10px" }}>
-        Upload
-      </button>
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+        <input
+          type="file"
+          accept=".csv, .xlsx, .xls"
+          onChange={handleFileChange}
+          style={{
+            padding: "10px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            cursor: "pointer"
+          }}
+        />
+        <button
+          onClick={handleUpload}
+          style={{
+            marginLeft: "10px",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            border: "none",
+            backgroundColor: "#27ae60",
+            color: "#fff",
+            cursor: "pointer",
+            fontWeight: "bold",
+            transition: "background-color 0.3s"
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#2ecc71")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#27ae60")}
+        >
+          Upload
+        </button>
+      </div>
 
       {/* Show table if tasks are available */}
       {tasks.length > 0 && (
         <div style={{ marginTop: "20px" }}>
-          <h3>Distributed Tasks</h3>
+          <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#34495e" }}>
+            Distributed Tasks
+          </h3>
           <table
-            border="1"
-            cellPadding="10"
-            style={{ borderCollapse: "collapse", width: "100%" }}
+            style={{
+              borderCollapse: "collapse",
+              width: "100%",
+              boxShadow: "0px 0px 10px rgba(0,0,0,0.1)"
+            }}
           >
-            <thead style={{ backgroundColor: "#f2f2f2" }}>
+            <thead style={{ backgroundColor: "#3498db", color: "#fff" }}>
               <tr>
-                <th>First Name</th>
-                <th>Phone</th>
-                <th>Notes</th>
-                <th>Assigned Agent</th>
+                <th style={{ padding: "10px" }}>First Name</th>
+                <th style={{ padding: "10px" }}>Phone</th>
+                <th style={{ padding: "10px" }}>Notes</th>
+                <th style={{ padding: "10px" }}>Assigned Agent</th>
               </tr>
             </thead>
             <tbody>
-              {tasks.map((task) => (
-                <tr key={task._id}>
-                  <td>{task.firstName}</td>
-                  <td>{task.phone}</td>
-                  <td>{task.notes}</td>
-                  <td>
+              {tasks.map((task, index) => (
+                <tr
+                  key={task._id}
+                  style={{
+                    backgroundColor: index % 2 === 0 ? "#ecf0f1" : "#fff",
+                    transition: "background-color 0.3s",
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#dfe6e9")}
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      index % 2 === 0 ? "#ecf0f1" : "#fff")
+                  }
+                >
+                  <td style={{ padding: "10px" }}>{task.firstName}</td>
+                  <td style={{ padding: "10px" }}>{task.phone}</td>
+                  <td style={{ padding: "10px" }}>{task.notes}</td>
+                  <td style={{ padding: "10px" }}>
                     {task.assignedAgent
                       ? `${task.assignedAgent.name} (${task.assignedAgent.email})`
                       : "N/A"}
