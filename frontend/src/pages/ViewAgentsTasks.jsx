@@ -11,12 +11,12 @@ export default function ViewAgentsTasks() {
     try {
       const token = localStorage.getItem("token");
 
-      const agentsResponse = await axios.get("http://localhost:5000/api/view/agents", {
+      const agentsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/view/agents`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAgents(agentsResponse.data.agents);
 
-      const tasksResponse = await axios.get("http://localhost:5000/api/view/tasks", {
+      const tasksResponse = await axios.get(`${process.env.REACT_APP_API_URL}/view/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(tasksResponse.data.tasks);
